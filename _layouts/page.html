@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+{%- include header.html -%}
+{%- include main-nav.html -%}
+<section class="content">
+    {%- if page.jumbotron -%}
+    {%- include jumbotron.html -%}
+    {%- else -%}
+    {%- include content-header.html -%}
+    {%- endif -%}
+    {{ content }}
+    {%- include content-nav.html -%}
+</section>
+{%- include footer.html -%}

@@ -1,0 +1,18 @@
+{%- if page.title || page.lead || page.description -%}
+<div class="jumbotron bg-light row no-gutters ">
+  <div class="col-md-6 mb-md-0 p-md-4">
+    {%- if page.title -%}
+    <h1 class="display-4">{{ page.title }}</h1>
+    {%- endif -%}
+    {%- if page.lead -%}
+    <p class="lead">{{ page.lead }}</p>
+    {%- endif -%}
+    <hr class="my-4">
+    {%- if page.description -%}
+    <p class="description">{{ page.description }}</p>
+    {%- endif -%}
+    <a class="btn btn-primary" href="#" role="button">Get Started</a>
+    <a class="btn btn-secondary" href="#" role="button">What's new</a>
+  </div>
+</div>
+{%- endif -%}
