@@ -4,20 +4,21 @@ description: >-
   Minimalistic and clean documentation theme aiming
   to minimalize differences between your repo
   documentation and the rendered one.
-#theme: chp9-codeater/dminima
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-
-# Theme configs
-dminima:
-  logo:
-      company: /assets/img/logo_compagny.svg
-      project: /assets/img/logo_project.svg
-  contact:
-    slack:
-      url: https://slack.com/app_redirect?channel=custom-channel
-      name: "Join #devs-observability"
-    github:
-      url: https://github.com/chp9-codeater/dminima
-      name: View it on GitHub
+copyright: Copyright &copy; 2020 Lorem Ipsum Inc.  All rights reserved.
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+      navbar-deph: 2
+      footer: false
+      show:
+        search: true
+        navbars: true
+        nav: true
+        jumbotron: true
+        breadcumb: true
+        content: true
+        toc: false
+        footer: true

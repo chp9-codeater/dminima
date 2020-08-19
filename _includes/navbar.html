@@ -1,0 +1,35 @@
+{% assign child_pages = site.pages | where: 'parent', include.navbar.title | sort: 'index' %}
+
+<nav class="navbar navbar-expand-lg navbar-light">
+
+  <a class="navbar-brand {% if include.navbar.logo %}text-hide{% endif %}" href="{{ include.navbar.url }}">
+    {%- if include.navbar.logo -%}
+    <img src="{{ include.navbar.logo }}" class="d-inline-block align-top" alt="" loading="lazy">
+    {%- endif -%}
+    {{- include.navbar.title -}}
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#{{ include.navbar.title | slugify }}"
+    aria-controls="{{include.navbar.title | slugify}}"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="{{include.navbar.title | slugify}}">
+
+    <ul class="navbar-nav mr-auto">
+      {% for child in child_pages %}
+      <li class="nav-item {% if child.title == page.title %}active{% endif %}">
+        <a class="nav-link" href="{{ child.url }}" id="{{ child.title | slugify }}" role="button">
+          {{- child.title -}}
+          {%- if child.title == page.title -%}
+          <span class="sr-only">(current)</span>
+          {%- endif -%}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+
+</nav>

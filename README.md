@@ -29,7 +29,7 @@ To activate the theme by adding a new line to your _config.yml with the theme na
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.cds.internal.unity3d.com/pages/unity/dminima/. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Development
 
