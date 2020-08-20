@@ -35,7 +35,7 @@
     });
 
     function lunr_search(term) {
-        result = "<p class='text-muted pd-2'>No results found...</p>"
+        result = "<p class='text-muted p-2 m-2'>No results found...</p>"
         if(term) {
             result = "<h6 class='dropdown-header'>Search results for '" + term + "'</h6>";
             //put results on the screen.
@@ -58,7 +58,7 @@
                         "</a>";
                 }
             } else {
-                result += "<p class='text-muted pd-2'>No results found...</p>";
+                result += "<p class='text-muted p-2 m-2'>No results found...</p>";
             }
         }
         document.getElementById('lunrsearchresults').innerHTML = result;
