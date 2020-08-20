@@ -8,6 +8,13 @@ description: Aenean consectetur tincidunt venenatis. Fusce rutrum felis non maxi
 card: /examples/assets/img/card.svg
 cover: /examples/assets/img/cover.svg
 date: 2020-08-18 12:17:00 +0500
+navbar:
+    ref: Scelerisque
+nav:
+    ref: Scelerisque
+toc:
+    min: 1
+    max: 2
 ---
 
 ## Get Started

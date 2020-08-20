@@ -1,3 +1,22 @@
-{% for item in site_hiearchy limit:page.navbar-deph %}
-  {% include navbar.html navbar=item %}
+{% assign navbar_start_title = page.navbar.ref | default: hiearchy_breadcrumb.first.title %}
+{% assign navbar_found = false %}
+{% assign navbar_depth = page.navbar.depth | default: 1 %}
+
+{% for current_navbar in hiearchy_breadcrumb %}
+  {% unless !navbar_found or current_navbar.title == navbar_start_title %}
+    <!-- Skip -->
+    {% continue %}
+  {% endunless %}
+
+  {% assign navbar_found = true %}
+  {% assign navbar_depth = navbar_depth | minus: 1 %}
+
+  {% include navbar.html navbar=current_navbar current_title=page.title search_bar=page.search %}
+
+  {% unless navbar_depth > 0 %}
+    <!-- Break -->
+    {% break %}
+  {% endunless %}
+
 {% endfor %}
+<!-- Done -->

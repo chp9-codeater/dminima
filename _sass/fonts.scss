@@ -1,4 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
-$font-family-base: Roboto, "Open Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$enable-responsive-font-sizes: true;
 
+// Font Bootstrap override:
+$font-family-sans-serif:      Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace:       "Cascadia Code PL", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+$font-size-base:              0.875rem; // Assumes the browser default, typically `16px` which relates to 1rem
+// $enable-responsive-font-sizes = true
+
+@font-face {
+    font-family: 'Cascadia Code PL';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('"/assets/webfonts/CascadiaCodePL.woff2') format('woff2'),
+    url('"/assets/webfonts/CascadiaCodePL.ttf') format('truetype');
+  }
+  

@@ -2,76 +2,22 @@
 <html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
   {%- include head.html %}
   <body>
-    {% include site_hiearchy.html %}
-    {% assign top_page = site.pages | where: "type","root" | first %}
-
-    {% if page.show.navbars %}
-    <header class="container">{% include navbars.html %}</header>
-    {% endif %}
-
-    <div class="container">
+    {% include resolve_hiearchy.html %}
+    {% include navbars.html %}
+    <div class="container-fluid">
       <div class="row flex-xl-nowrap">
-        {% if page.show.nav %}
-        <div id="left-nav" class="col-md-3 col-xl-2 order-first overflow-auto just-padding">
-          
-          {% if page.show.search %}
-            {% include nav_search.html %}
-          {% endif %}
-
-          <div class="m-2">
-            <div class="list-group list-group-flush list-group-root">
-              {% include nav_recursive.html item=top_page %}
-            </div>
-          </div>
-        </div>
-        {% endif %}
-
-        {% if page.show.toc %}
-        <nav id="right-nav" class="d-none d-xl-block col-xl-2 order-last">
-          {% include toc.html -%}
+        <nav id="left-nav" class="col-md-3 col-xl-2 order-first position-sticky"><!-- bd-sidebar -->
+          {% include nav_site.html %}
         </nav>
-        {% endif %}
-
+        <nav id="right-nav" class="d-none d-xl-block col-xl-2 order-last position-sticky">
+          {% include nav_content.html %}
+        </nav>
         <main class="col-md-9 col-xl-8 py-md-3 pl-md-5" role="main">
-          {% if page.show.jumbotron %}
-          <header id="presentation">
-            {% include jumbotron.html %}
-          </header>
-          {% endif %}
-
-          {% if page.show.breadcumb %}
-          <nav id="content-nav">
-            {% include breadcrumb.html %}
-          </nav>
-          {% endif %}
-
-          {% if page.show.content %}
-          <section id="main">
-            {{ content }}
-          </section>
-          {% endif %}
+          {% include main.html %}
+          {% include footer.html %}    
         </main>
-
       </div>
     </div>
-    {% if page.show.footer %}
-    <footer class="container">
-      {% include footer.html %}    
-    </footer>
-    {% endif %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script>
-      $(function() {
-        
-        $('.list-group-item-link').on('click', function(e) {
-          $( this ).toggleClass('fa-caret-right','fa-caret-down')
-        });
-      
-      });      
-    </script>
+    {% include javascripts.html %}
   </body>
 </html>

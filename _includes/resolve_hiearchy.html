@@ -1,0 +1,53 @@
+{% comment %}
+
+hiearchy_breadcrumb: A list going from top reference to the current page
+hiearchy_hash: A hash of all childs per pages
+hiearchy_childs: A list of current page childs
+hiearchy_show_nav: Whatever if this page allow showing the navigation pane
+
+{% endcomment %}
+
+
+{% assign temp_page = page %}
+{% assign hiearchy_breadcrumb = "" | split: "" | push: temp_page %}
+{% assign hiearchy_hash = site.pages | sort: "index" | group_by: "parent" %}
+{% assign hiearchy_show_nav = page.nav | default: true %}
+
+<!-- Starting with "{{ temp_page.title }}" -->
+{% for i in (0..99) %}
+  {% if temp_page.parent == nil %}
+    <!-- No further parent page found exiting... -->
+    {% break %}
+  {% endif %}
+  
+  <!-- Finding "{{ temp_page.title }}" parent named "{{ temp_page.parent }}" -->
+  {% assign temp_page = site.pages | where: 'title', temp_page.parent | first %}
+
+  <!-- Found: "{{ temp_page.title }}" -->
+  {% assign hiearchy_breadcrumb = hiearchy_breadcrumb | push: temp_page %}
+{% endfor %}
+{% assign hiearchy_breadcrumb = hiearchy_breadcrumb | reverse %}
+{% assign hiearchy_childs = hiearchy_hash | where: "name", page.title | first %}
+{% assign hiearchy_childs = hiearchy_childs.items %}
+<!--
+  {{ hiearchy_childs["items"] }}
+
+hiearchy_breadcrumb:
+{%- for hb in hiearchy_breadcrumb %}
+- {{ hb.title }}
+{%- endfor %}
+
+hiearchy_hash:
+{%- for hh in hiearchy_hash %}
+- {{ hh.name | default: "Nil" }}:
+{%- for hh_item in hh.items %}
+  - {{ hh_item.title }}
+{%- endfor %}
+{%- endfor %}
+
+hiearchy_childs (for page.title="{{ page.title }}"):
+{%- for hc_item in hiearchy_childs %}
+- {{ hc_item.title }}
+{%- endfor %}
+
+-->

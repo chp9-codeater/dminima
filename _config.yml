@@ -1,24 +1,10 @@
 title: Documentation Minimal Theme
-lead: Strait to the docs, clean markdown
+lead: Strait to the docs, clean markdown theme
 description: >-
   Minimalistic and clean documentation theme aiming
   to minimalize differences between your repo
   documentation and the rendered one.
 copyright: Copyright &copy; 2020 Lorem Ipsum Inc.  All rights reserved.
-defaults:
-  -
-    scope:
-      path: "" # an empty string here means all files in the project
-    values:
-      layout: "default"
-      navbar-deph: 2
-      footer: false
-      show:
-        search: true
-        navbars: true
-        nav: true
-        jumbotron: true
-        breadcumb: true
-        content: true
-        toc: false
-        footer: true
+
+plugins:
+  - jekyll-seo-tag

@@ -1,0 +1,76 @@
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
+<script>
+    {% assign counter = 0 %}
+    var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or page.url contains 'assets' %}{% else %}{
+        "id": {{ counter }},
+        "url": "{{ site.url }}{{ page.url }}",
+        "title": "{{ page.title }}",
+        "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
+        }, {% endif %}{% endfor %}{% for page in site.without-plugin %}{
+        "id": {{ counter }},
+        "url": "{{ site.url }}{{ page.url }}",
+        "title": "{{ page.title }}",
+        "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
+        }, {% endfor %}{% for page in site.posts %}{
+        "id": {{ counter }},
+        "url": "{{ site.url }}{{ page.url }}",
+        "title": "{{ page.title }}",
+        "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
+        }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
+
+    var idx = lunr(function () {
+        this.ref('id')
+        this.field('title')
+        this.field('body')
+
+        documents.forEach(function (doc) {
+            this.add(doc)
+        }, this)
+    });
+
+    function lunr_search(term) {
+        result = "<p class='text-muted pd-2'>No results found...</p>"
+        if(term) {
+            result = "<h6 class='dropdown-header'>Search results for '" + term + "'</h6>";
+            //put results on the screen.
+            var results = idx.search(term);
+            if(results.length>0){
+                //console.log(idx.search(term));
+                //if results
+                for (var i = 0; i < results.length; i++) {
+                    // more statements
+                    var ref = results[i]['ref'];
+                    var url = documents[ref]['url'];
+                    var title = documents[ref]['title'];
+                    var body = documents[ref]['body'].substring(0,160)+'...';
+                    result += "<a href='" + url + "' class='dropdown-item lunrsearchresult'>" +
+                            "<span class='title'>" + title + "</span>" +
+                            "<br />"+
+                            "<span class='body'>"+ body +"</span>" +
+                            "<br />" +
+                            "<span class='url'>"+ url +"</span>" +
+                        "</a>";
+                }
+            } else {
+                result += "<p class='text-muted pd-2'>No results found...</p>";
+            }
+        }
+        document.getElementById('lunrsearchresults').innerHTML = result;
+        return false;
+    }        
+
+    $(function() {
+        anchors.add();
+        $('.list-group-item-link').on('click', function(e) {
+            $( this ).toggleClass('fa-caret-right','fa-caret-down')
+        });
+    });      
+
+</script>
+

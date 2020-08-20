@@ -1,6 +1,6 @@
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb content-nav">
   <ol class="breadcrumb">
-{% for item in site_hiearchy %}
+{% for item in hiearchy_breadcrumb %}
     <li class="breadcrumb-item {% if page.title == item.title %}active{%endif%}" {% if page.title == item.title %}aria-current="page"{%endif%}>
       {% if page.title == item.title %}
       {{ item.title }}

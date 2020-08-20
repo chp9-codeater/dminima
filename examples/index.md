@@ -3,11 +3,13 @@ type: root
 title: Lorem Ipsum Inc.
 lead: Dolor sit amet, consectetur adipiscing elit
 description: Nam eget imperdiet dolor, vitae cursus ante. Suspendisse sed blandit justo, at fringilla augue. Sed ut rutrum quam.
-logo: /examples/assets/img/logo.svg
+logo: /examples/assets/img/logo-lorem-ipsum.svg
 card: /examples/assets/img/card.svg
 cover: /examples/assets/img/cover.svg
 permalink: /
-
+toc:
+    max: 3
+search: true
 jumbotron:
   actions:
     "Look at our Mission": \#mission
