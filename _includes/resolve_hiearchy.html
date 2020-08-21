@@ -1,20 +1,35 @@
 {% comment %}
 
-hiearchy_breadcrumb: A list going from top reference to the current page
+hiearchy_bottom_up: A list going from top reference to the current page
 hiearchy_hash: A hash of all childs per pages
 hiearchy_childs: A list of current page childs
 hiearchy_show_nav: Whatever if this page allow showing the navigation pane
+hiearchy_top_navbar: The top Navbar
+hiearchy_top_nav: The top Navigation
 
 {% endcomment %}
 
 
 {% assign temp_page = page %}
-{% assign hiearchy_breadcrumb = "" | split: "" | push: temp_page %}
+{% assign hiearchy_bottom_up = "" | split: "" | push: temp_page %}
 {% assign hiearchy_hash = site.pages | sort: "index" | group_by: "parent" %}
 {% assign hiearchy_show_nav = page.nav | default: true %}
+{% assign hiearchy_top_navbar_index = -1 %}
+{% assign hiearchy_top_nav_index = -1 %}
 
 <!-- Starting with "{{ temp_page.title }}" -->
 {% for i in (0..99) %}
+
+  {% if hiearchy_top_navbar_index < 0 and temp_page.navbar.ref %}
+    {% assign hiearchy_top_navbar_index = i %}
+    <!-- Asssigned {{ hiearchy_top_navbar_index }} -->
+  {% endif %}
+
+  {% if hiearchy_top_nav_index < 0 and temp_page.nav.ref %}
+    {% assign hiearchy_top_nav_index = i %}
+  {% endif %}
+
+
   {% if temp_page.parent == nil %}
     <!-- No further parent page found exiting... -->
     {% break %}
@@ -24,16 +39,22 @@ hiearchy_show_nav: Whatever if this page allow showing the navigation pane
   {% assign temp_page = site.pages | where: 'title', temp_page.parent | first %}
 
   <!-- Found: "{{ temp_page.title }}" -->
-  {% assign hiearchy_breadcrumb = hiearchy_breadcrumb | push: temp_page %}
+  {% assign hiearchy_bottom_up = hiearchy_bottom_up | push: temp_page %}
+
 {% endfor %}
-{% assign hiearchy_breadcrumb = hiearchy_breadcrumb | reverse %}
+
+{% assign hiearchy_top_down = hiearchy_bottom_up | reverse %}
 {% assign hiearchy_childs = hiearchy_hash | where: "name", page.title | first %}
 {% assign hiearchy_childs = hiearchy_childs.items %}
-<!--
-  {{ hiearchy_childs["items"] }}
 
-hiearchy_breadcrumb:
-{%- for hb in hiearchy_breadcrumb %}
+{% assign hiearchy_top_navbar_index = hiearchy_top_navbar_index | default: 999 %}
+{% assign hiearchy_top_nav_index = hiearchy_top_nav_index | default: 999 %}
+{% assign hiearchy_top_navbar = hiearchy_bottom_up[hiearchy_top_navbar_index] %}
+{% assign hiearchy_top_nav = hiearchy_bottom_up[hiearchy_top_nav_index] %}
+
+<!--
+hiearchy_top_down:
+{%- for hb in hiearchy_top_down %}
 - {{ hb.title }}
 {%- endfor %}
 
@@ -49,5 +70,11 @@ hiearchy_childs (for page.title="{{ page.title }}"):
 {%- for hc_item in hiearchy_childs %}
 - {{ hc_item.title }}
 {%- endfor %}
+
+hiearchy_top_navbar ({{ hiearchy_top_navbar_index }}):
+{{ hiearchy_top_navbar.title }}
+
+hiearchy_top_nav ({{ hiearchy_top_nav_index }}):
+{{ hiearchy_top_nav.title }}
 
 -->

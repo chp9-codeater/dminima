@@ -1,0 +1,23 @@
+.collapse {
+  display: none;
+  &.show {
+    display: block;
+  }
+}
+
+#site-nav, #site-nav ul, 
+#content-toc, #content-toc ul
+{ list-style: none; padding: 0; }
+
+#content-toc ul,
+#site-nav ul
+{ padding: 0.25rem 0.5rem; }
+
+ #site-nav li,
+ #content-toc li
+{ white-space: nowrap; padding:0;}
+
+ #site-nav .list-group-item,
+ #content-toc .list-group-item
+ { padding: 0.25rem 0.5rem; border-width: 0; }
+ 

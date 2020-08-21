@@ -1,5 +1,5 @@
 {% for child in include.childs %}
-<div class="list-group-item {% if child.title == page.title %}active{% endif %}">
-  <a href="{{ child.url }}" class="{% if child.title == page.title %}active{% endif %}">{{- child.title -}}</a>
-</div>
+<li class="list-group-item list-group-item-action {% if child.title == page.title %}active{% endif %}">
+  <a href="{{ child.url }}">{{- child.title -}}</a>
+</li>
 {% endfor %}

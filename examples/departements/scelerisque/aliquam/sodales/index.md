@@ -8,6 +8,13 @@ description: Ut faucibus feugiat ullamcorper. Proin eget consequat mi. Duis mass
 card: /examples/assets/img/card.svg
 cover: /examples/assets/img/cover.svg
 date: 2020-08-18 12:17:00 +0500
+navbar:
+    ref: Sodales
+nav:
+    ref: Sodales
+toc:
+    min: 1
+    max: 2
 ---
 
 ## Get Started

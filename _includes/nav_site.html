@@ -1,7 +1,7 @@
-{% assign nav_start_title = page.nav.ref | default: hiearchy_breadcrumb.first.title %}
-<div class="list-group list-group-flush list-group-root">
+{% assign nav_start_title = page.nav.ref | default: hiearchy_top_nav.title %}
+<ul id="site-nav" class="list-group list-group-flush">
   {% assign nav_slug = nav_start_title | slugify %}
   {% assign nav_childs = hiearchy_hash | where: "name", nav_start_title | first %}
   {% assign nav_childs = nav_childs.items %}
   {% include nav_recursive_0.html slug=nav_slug childs=nav_childs depth=nav_depth %}
-</div>
+</ul>

@@ -3,15 +3,17 @@
 {% assign nav_childs = hiearchy_hash | where: "name", child.title | first %}
 {% assign nav_childs = nav_childs.items %}
 
-<div class="list-group-item {% if child.title == page.title %}active{% endif %}">
+<li>
+  <span class="list-group-item list-group-item-action {% if child.title == page.title %}active{% endif %}">
+    {% if nav_childs.size > 0 %}
+    <i href="#menu-{{ nav_slug }}" class="list-group-item-link fa fa-caret-down mr-1" data-toggle="collapse"></i>
+    {% endif %}
+    <a href="{{ child.url }}">{{- child.title -}}</a>
+  </span>
   {% if nav_childs.size > 0 %}
-  <i href="#menu-{{ nav_slug }}" class="list-group-item-link fa fa-caret-down mr-2" data-toggle="collapse"></i>
+  <ul id="menu-{{ nav_slug }}" class="list-group list-group-flush collapse show">
+    {% include nav_recursive_end.html slug=nav_slug childs=nav_childs %}
+  </ul>
   {% endif %}
-  <a href="{{ child.url }}" class="{% if child.title == page.title %}active{% endif %}">{{- child.title -}}</a>
-</div>
-{% if nav_childs.size > 0 %}
-<div id="menu-{{ nav_slug }}" class="list-group list-group-flush collapse show">
-  {% include nav_recursive_end.html slug=nav_slug childs=nav_childs %}
-</div>
-{% endif %}
+</li>
 {% endfor %}

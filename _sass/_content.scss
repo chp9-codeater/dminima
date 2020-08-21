@@ -7,21 +7,20 @@ main {
   p { text-align: justify; }
 }
 
-.sticky {
-  position: sticky;
-}
-
 header.navbar {
   top: 0rem;
   z-index: 1071;
   min-height: 4rem;
-  background-color: white;
 }
 
 #left-nav, #right-nav {
   top: 4rem;
   z-index: 1000;
   height: calc(100vh - 4rem);
+}
+
+#main {
+  position: relative;
 }
 
 #left-nav {}

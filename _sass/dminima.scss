@@ -1,11 +1,12 @@
-@import "fonts";
-@import "colors";
-@import "layout";
-@import "rouge-github";
+@import "_bootstrap_config";
 
 @import "bootstrap/bootstrap";
 @import "fontawesome/fontawesome";
 @import "fontawesome/solid";
 @import "fontawesome/brands";
-@import "nav";
-@import "content";
+
+@import "_rouge-github";
+@import "_colors";
+@import "_fonts";
+@import "_content";
+@import "_nav";

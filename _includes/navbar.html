@@ -1,6 +1,5 @@
 {% assign child_pages = site.pages | where: 'parent', include.navbar.title | sort: 'index' %}
-{% if child_pages.size > 0 %}
-<header class="navbar navbar-expand-lg navbar-light position-sticky"><!-- bd-navbar -->
+<header class="navbar navbar-expand-lg navbar-light bg-white position-sticky"><!-- bd-navbar -->
   <a class="navbar-brand mr-0 mr-md-2 {% if include.navbar.logo %}text-hide{% endif %}" href="{{ include.navbar.url }}">
     {%- if include.navbar.logo -%}
     <img src="{{ include.navbar.logo }}" class="d-inline-block align-top" alt="" loading="lazy">
@@ -16,6 +15,7 @@
 
   <div class="collapse navbar-collapse" id="{{ include.navbar.title | slugify }}">
 
+    {% if child_pages.size > 0 %}
     <ul class="navbar-nav mr-auto">
       {% for child in child_pages %}
       <li class="nav-item {% if child.title == include.current_title %}active{% endif %}">
@@ -32,8 +32,9 @@
     {% if include.navbar.search %}
     {% include search-lunr.html %}
     {%- endif -%}
+    {%- endif -%}
+
 
   </div>
 
 </header>
-{%- endif -%}

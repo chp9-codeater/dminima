@@ -13,7 +13,7 @@ search: true
 jumbotron:
   actions:
     "Look at our Mission": \#mission
-    "Look at our Departements": \#departements
+    "Look at our Teams": \#Teams
   background-image: /examples/assets/img/img.svg
 ---
 
