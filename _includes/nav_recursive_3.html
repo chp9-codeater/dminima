@@ -8,7 +8,7 @@
     {% if nav_childs.size > 0 %}
     <i href="#menu-{{ nav_slug }}" class="list-group-item-link fa fa-caret-down mr-1" data-toggle="collapse"></i>
     {% endif %}
-    <a href="{{ child.url }}">{{- child.title -}}</a>
+    <a href="{{ site.baseurl }}{{ child.url }}">{{- child.title -}}</a>
   </span>
   {% if nav_childs.size > 0 %}
   <ul id="menu-{{ nav_slug }}" class="list-group list-group-flush collapse show">

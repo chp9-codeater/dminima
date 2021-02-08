@@ -1,5 +1,5 @@
 {% for child in include.childs %}
 <li class="list-group-item list-group-item-action {% if child.title == page.title %}active{% endif %}">
-  <a href="{{ child.url }}">{{- child.title -}}</a>
+  <a href="{{ site.baseurl }}{{ child.url }}">{{- child.title -}}</a>
 </li>
 {% endfor %}
