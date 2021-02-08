@@ -57,20 +57,20 @@ Site: {{site.github.repository_url}}
 
 hiearchy_top_down:
 {%- for hb in hiearchy_top_down %}
-- {{ hb.title }} (url={{ hb.url }}, path={{ hb.path }})
+- {{ hb.title }} (url={{ hb.url }})
 {%- endfor %}
 
 hiearchy_hash:
 {%- for hh in hiearchy_hash %}
 - {{ hh.name | default: "Nil" }}:
 {%- for hh_item in hh.items %}
-  - {{ hh_item.title }} (url={{ hh_item.url }}, path={{ hh_item.path }})
+  - {{ hh_item.title }} (url={{ hh_item.url }})
 {%- endfor %}
 {%- endfor %}
 
-hiearchy_childs (for page.title="{{ page.title }}", page.url="{{ page.url }}"):
+hiearchy_childs (for page.title="{{ page.title }}"):
 {%- for hc_item in hiearchy_childs %}
-- {{ hc_item.title }} (url={{ hc_item.url }}, path={{ hc_item.path }})
+- {{ hc_item.title }} (url={{ hc_item.url }})
 {%- endfor %}
 
 hiearchy_top_navbar ({{ hiearchy_top_navbar_index }}):
