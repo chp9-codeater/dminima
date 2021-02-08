@@ -68,7 +68,7 @@ hiearchy_hash:
 
 hiearchy_childs (for page.title="{{ page.title }}"):
 {%- for hc_item in hiearchy_childs %}
-- {{ hc_item.title }}
+- {{ hc_item.title }} ({{ hc_item.url }})
 {%- endfor %}
 
 hiearchy_top_navbar ({{ hiearchy_top_navbar_index }}):
