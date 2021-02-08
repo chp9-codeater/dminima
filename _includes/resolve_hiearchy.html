@@ -62,7 +62,7 @@ hiearchy_hash:
 {%- for hh in hiearchy_hash %}
 - {{ hh.name | default: "Nil" }}:
 {%- for hh_item in hh.items %}
-  - {{ hh_item.title }}
+  - {{ hh_item.title }} ({{ hh_item.url }})
 {%- endfor %}
 {%- endfor %}
 
