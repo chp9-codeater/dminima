@@ -1,6 +1,6 @@
 {% assign child_pages = site.pages | where: 'parent', include.navbar.title | sort: 'index' %}
 <header class="navbar navbar-expand-lg navbar-light bg-white position-sticky"><!-- bd-navbar -->
-  <a class="navbar-brand mr-0 mr-md-2 {% if include.navbar.logo %}text-hide{% endif %}" href="{{ include.navbar.url }}">
+  <a class="navbar-brand mr-0 mr-md-2 {% if include.navbar.logo %}text-hide{% endif %}" href="{{site.github.repository_url}}{{ include.navbar.url }}">
     {%- if include.navbar.logo -%}
     <img src="{{ include.navbar.logo }}" class="d-inline-block align-top" alt="" loading="lazy">
     {%- endif -%}
@@ -19,7 +19,7 @@
     <ul class="navbar-nav mr-auto">
       {% for child in child_pages %}
       <li class="nav-item {% if child.title == include.current_title %}active{% endif %}">
-        <a class="nav-link" href="{{ child.url }}" id="{{ child.title | slugify }}" role="button">
+        <a class="nav-link" href="{{site.github.repository_url}}{{ child.url }}" id="{{ child.title | slugify }}" role="button">
           {{- child.title -}}
           {%- if child.title == include.active -%}
           <span class="sr-only">(current)</span>
